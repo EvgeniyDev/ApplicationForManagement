@@ -1,6 +1,63 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
+<h1>Список записей</h1>
+<input type="button" value="Добавить" class="btn btn-light" (click)="add()" />
+<div class="col-md-8">
+  <table *ngIf="tableMode; else create" class="table table-striped" id="listOfNotes">
+    <thead>
+      <tr>
+        <td>Имя</td>
+        <td>Фамилия</td>
+        <td>Возраст</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let n of notes">
+        <ng-template [ngIf]="note?.id != n.id" [ngIfElse]="edit">
+          <td>{{n?.name}}</td>
+          <td>{{n?.surname}}</td>
+          <td>{{n?.age}}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" (click)="editNote(n)">Изменить</button>
+            <button class="btn btn-sm btn-danger" (click)="delete(n)">Удалить</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #edit>
+  <td>
+    <input type="text" [(ngModel)]="note.name" class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="note.surname" class="form-control" />
+  </td>
+  <td>
+    <input type="number" [(ngModel)]="note.age" class="form-control" />
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+  </td>
+</ng-template>
+
+<ng-template #create>
+  <div class="form-group">
+    <label>Имя</label>
+    <input type="text" ng-model="note.name" [(ngModel)]="note.name" class="form-control" />
   </div>
-</body>
+  <div class="form-group">
+    <label>Фамилия</label>
+    <input type="text" ng-model="note.surname" [(ngModel)]="note.surname" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Возраст</label>
+    <input type="number" ng-model="note.age" [(ngModel)]="note.age" class="form-control" />
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </div>
+</ng-template>
