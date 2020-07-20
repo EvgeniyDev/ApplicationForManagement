@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using AppForManagement.Models;
+using AppForManagement.Domain.Entities;
+using AppForManagement.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppForManagement.Controllers
@@ -9,32 +9,23 @@ namespace AppForManagement.Controllers
     [Route("api/notes")]
     public class NoteController : Controller
     {
-        private readonly ApplicationContext db;
+        private readonly DataManager dataManager;
 
-        public NoteController(ApplicationContext context)
+        public NoteController(DataManager dataManager)
         {
-            db = context;
-
-            if (!db.Notes.Any())
-            {
-                db.Notes.Add(new Note { Name = "A", Surname = "B", Age = 38 });
-                db.Notes.Add(new Note { Name = "C", Surname = "D", Age = 38 });
-                db.Notes.Add(new Note { Name = "E", Surname = "F", Age = 36 });
-
-                db.SaveChanges();
-            }
+            this.dataManager = dataManager;
         }
 
         [HttpGet]
         public IEnumerable<Note> Get()
         {
-            return db.Notes.ToList();
+            return dataManager.Notes.GetAllNotes();
         }
 
         [HttpGet("{id}")]
         public Note Get(int id)
         {
-            return db.Notes.FirstOrDefault(x => x.Id == id);
+            return dataManager.Notes.GetNoteByID(id);
         }
 
         [HttpPost]
@@ -42,11 +33,11 @@ namespace AppForManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Notes.Add(note);
-                db.SaveChanges();
+                dataManager.Notes.AddNoteAsync(note);
 
                 return Ok(note);
             }
+
             return BadRequest(ModelState);
         }
 
@@ -55,8 +46,7 @@ namespace AppForManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(note);
-                db.SaveChanges();
+                dataManager.Notes.UpdateNoteAsync(note);
 
                 return Ok(note);
             }
@@ -68,15 +58,9 @@ namespace AppForManagement.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var note = db.Notes.FirstOrDefault(x => x.Id == id);
+            dataManager.Notes.RemoveNoteAsync(id);
 
-            if (note != null)
-            {
-                db.Notes.Remove(note);
-                db.SaveChanges();
-            }
-
-            return Ok(note);
+            return Ok();
         }
     }
 }

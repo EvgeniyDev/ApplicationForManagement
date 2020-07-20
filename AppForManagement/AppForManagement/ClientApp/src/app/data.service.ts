@@ -21,10 +21,11 @@ export class DataService {
   createNote(note: Note) {
     return this.http.post(this.url, note);
   }
-  updateNote(note: Note) {
 
+  updateNote(note: Note) {
     return this.http.put(this.url, note);
   }
+
   deleteNote(id: number) {
     return this.http.delete(this.url + '/' + id);
   }

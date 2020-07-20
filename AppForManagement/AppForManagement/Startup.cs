@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AppForManagement.Models;
+using AppForManagement.Domain;
+using AppForManagement.Domain.Repository;
+using AppForManagement.Domain.Repository.Abstract;
+using AppForManagement.Domain.Repository.EF;
+using AppForManagement.Domain.Repository.JsonDb;
 
 namespace AppForManagement
 {
@@ -21,8 +24,11 @@ namespace AppForManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=notesdb;Trusted_Connection=True;";
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient<INotesRepository, JsonNotesRepository>();
+            services.AddTransient<DataManager>();
+
+            //var connectionString = "Server=(localdb)\\mssqllocaldb;Database=notesdb;Trusted_Connection=True;";
+            //services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
 
             services.AddControllersWithViews();
 

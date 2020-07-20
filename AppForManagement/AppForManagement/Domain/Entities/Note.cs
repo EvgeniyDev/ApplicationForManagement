@@ -1,4 +1,4 @@
-﻿namespace AppForManagement.Models
+﻿namespace AppForManagement.Domain.Entities
 {
     public class Note
     {

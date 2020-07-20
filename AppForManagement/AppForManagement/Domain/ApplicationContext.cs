@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using AppForManagement.Domain.Entities;
 
-namespace AppForManagement.Models
+namespace AppForManagement.Domain
 {
     public class ApplicationContext : DbContext
     {
