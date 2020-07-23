@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class CourseEffects {
+export class NoteEffects {
 
   loadCourses$ = createEffect(() =>
     this.actions$.pipe(

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AppForManagement.Domain.Entities;
 using AppForManagement.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace AppForManagement.Controllers
         }
 
         [HttpGet("{id}")]
-        public Note Get(int id)
+        public Note Get(Guid id)
         {
             return dataManager.Notes.GetNoteByID(id);
         }
@@ -56,7 +57,7 @@ namespace AppForManagement.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             dataManager.Notes.RemoveNoteAsync(id);
 

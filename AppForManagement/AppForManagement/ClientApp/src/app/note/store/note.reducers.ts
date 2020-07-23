@@ -13,7 +13,7 @@ export const initialState = adapter.getInitialState({
   notesLoaded: false
 });
 
-export const noteReducer = createReducer(
+const _noteReducer = createReducer(
   initialState,
 
   on(noteActionTypes.notesLoaded, (state, action) => {
@@ -35,5 +35,9 @@ export const noteReducer = createReducer(
     return adapter.updateOne(action.update, state);
   })
 );
+
+export function noteReducer(state, action) {
+  return _noteReducer(state, action)
+}
 
 export const { selectAll, selectIds } = adapter.getSelectors();

@@ -1,6 +1,7 @@
 ﻿using AppForManagement.Domain.Entities;
 using AppForManagement.Domain.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,12 +27,12 @@ namespace AppForManagement.Domain.Repository.EF
             return appDBContext.Notes.ToList();
         }
 
-        public Note GetNoteByID(int id)
+        public Note GetNoteByID(Guid id)
         {
             return appDBContext.Notes.FirstOrDefault(x => x.Id == id);
         }
 
-        public void RemoveNoteAsync(int id)
+        public void RemoveNoteAsync(Guid id)
         {
             var noteToDelete = appDBContext.Notes.FirstOrDefault(x => x.Id == id);
 

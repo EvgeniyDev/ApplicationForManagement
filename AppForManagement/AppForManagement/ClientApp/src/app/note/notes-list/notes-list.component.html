@@ -1,0 +1,60 @@
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Age</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let note of notes$ | async">
+        <td>{{ note.name }}</td>
+        <td>{{ note.surname }}</td>
+        <td>{{ note.age }}</td>
+        <td>
+          <button (click)="showUpdateForm(note)" class="btn btn-primary" style="margin: 5px">Update</button>
+          <button (click)="deleteNote(note.id)" class="btn btn-danger" style="margin: 5px">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="isUpdateActivated" style="margin-top: 50px; margin-left: 50px;">
+    <h4>Update Note</h4>
+    <form (ngSubmit)="updateNote(updateForm)" #updateForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"
+               id="name"
+               name="name"
+               class="form-control"
+               required
+               [(ngModel)]="noteToBeUpdated.name"
+               style="width: 300px" />
+      </div>
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text"
+               id="surname"
+               name="surname"
+               class="form-control"
+               required
+               [(ngModel)]="noteToBeUpdated.surname"
+               style="width: 300px" />
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number"
+               id="age"
+               name="age"
+               class="form-control"
+               required
+               [(ngModel)]="noteToBeUpdated.age"
+               style="width: 200px" />
+      </div>
+      <button [disabled]="updateForm.invalid" class="btn btn-primary" type="submit">Update note</button>
+    </form>
+  </div>
+</div>

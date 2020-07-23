@@ -1,17 +1,16 @@
 ﻿using AppForManagement.Domain.Repository.Abstract;
 using AppForManagement.Domain.Entities;
 using Newtonsoft.Json;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace AppForManagement.Domain.Repository.JsonDb
 {
     public class JsonNotesRepository : INotesRepository
     {
-        private static int noteId = 0;
-
         private readonly string dataFile;
         private readonly IList<Note> data;
 
@@ -30,20 +29,18 @@ namespace AppForManagement.Domain.Repository.JsonDb
                 data = new List<Note>();
 
                 // Dummy data
-                AddNoteAsync(new Note() { Name = "Name", Surname = "Surname", Age = 15 });
-                AddNoteAsync(new Note() { Name = "Name2", Surname = "Surname", Age = 18 });
-                AddNoteAsync(new Note() { Name = "Name3", Surname = "Surname", Age = 35 });
+                AddNoteAsync(new Note() { Id = new Guid("62c10938-80d3-4f30-b338-cc0e94899b7d"), Name = "Name", Surname = "Surname", Age = 15 });
+                AddNoteAsync(new Note() { Id = new Guid("9e17bd9e-f334-465d-ad8d-03e22e43b375"), Name = "Name2", Surname = "Surname", Age = 18 });
+                AddNoteAsync(new Note() { Id = new Guid("1b2ae4c0-f4ea-4114-a582-6b893fd30d30"), Name = "Name3", Surname = "Surname", Age = 35 });
             }
             else
             {
                 data = JsonConvert.DeserializeObject<IList<Note>>(GetDBDataAsync().Result);
-                noteId = data[data.Count - 1].Id;
             }
         }
 
         public async void AddNoteAsync(Note newNote)
         {
-            newNote.Id = ++noteId;
             data.Add(newNote);
 
             var jsonData = JsonConvert.SerializeObject(data);
@@ -55,12 +52,12 @@ namespace AppForManagement.Domain.Repository.JsonDb
             return data.ToList();
         }
 
-        public Note GetNoteByID(int id)
+        public Note GetNoteByID(Guid id)
         {
             return data.FirstOrDefault(x => x.Id == id);
         }
 
-        public async void RemoveNoteAsync(int id)
+        public async void RemoveNoteAsync(Guid id)
         {
             var noteToRemove = data.FirstOrDefault(x => x.Id == id);
 
@@ -75,10 +72,10 @@ namespace AppForManagement.Domain.Repository.JsonDb
 
         public async void UpdateNoteAsync(Note updatedNote)
         {
-            var noteToUpdate = data.FirstOrDefault(x => x.Id == updatedNote.Id);
-            noteToUpdate.Name = updatedNote.Name;
-            noteToUpdate.Surname = updatedNote.Surname;
-            noteToUpdate.Age = updatedNote.Age;
+            var noteIndex = data.ToList().FindIndex(x => x.Id == updatedNote.Id);
+            data[noteIndex].Name = updatedNote.Name;
+            data[noteIndex].Surname = updatedNote.Surname;
+            data[noteIndex].Age = updatedNote.Age;
 
             var jsonData = JsonConvert.SerializeObject(data);
             await File.WriteAllTextAsync(dataFile, jsonData);

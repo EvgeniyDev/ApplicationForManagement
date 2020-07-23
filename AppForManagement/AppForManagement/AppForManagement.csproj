@@ -29,8 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\data.service.ts" />
-    <None Remove="ClientApp\src\app\note.ts" />
+    <None Remove="ClientApp\src\app\note\create-note\create-note.component.ts" />
+    <None Remove="ClientApp\src\app\note\note.resolver.ts" />
+    <None Remove="ClientApp\src\app\note\notes-list\notes-list.component.ts" />
     <None Remove="ClientApp\src\app\note\store\note.actions.ts" />
     <None Remove="ClientApp\src\app\note\store\note.effects.ts" />
     <None Remove="ClientApp\src\app\note\store\note.reducers.ts" />
@@ -38,8 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\data.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\note.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\note\create-note\create-note.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\note\note.resolver.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\note\notes-list\notes-list.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\note\store\note.actions.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\note\store\note.effects.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\note\store\note.reducers.ts" />

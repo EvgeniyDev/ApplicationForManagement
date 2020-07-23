@@ -19,7 +19,7 @@ exports.adapter = entity_1.createEntityAdapter();
 exports.initialState = exports.adapter.getInitialState({
     notesLoaded: false
 });
-exports.noteReducer = store_1.createReducer(exports.initialState, store_1.on(note_actions_1.noteActionTypes.notesLoaded, function (state, action) {
+var _noteReducer = store_1.createReducer(exports.initialState, store_1.on(note_actions_1.noteActionTypes.notesLoaded, function (state, action) {
     return exports.adapter.addAll(action.notes, __assign(__assign({}, state), { notesLoaded: true }));
 }), store_1.on(note_actions_1.noteActionTypes.createNote, function (state, action) {
     return exports.adapter.addOne(action.note, state);
@@ -28,5 +28,9 @@ exports.noteReducer = store_1.createReducer(exports.initialState, store_1.on(not
 }), store_1.on(note_actions_1.noteActionTypes.updateNote, function (state, action) {
     return exports.adapter.updateOne(action.update, state);
 }));
+function noteReducer(state, action) {
+    return _noteReducer(state, action);
+}
+exports.noteReducer = noteReducer;
 exports.selectAll = (_a = exports.adapter.getSelectors(), _a.selectAll), exports.selectIds = _a.selectIds;
 //# sourceMappingURL=note.reducers.js.map

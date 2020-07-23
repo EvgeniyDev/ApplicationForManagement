@@ -15,22 +15,22 @@ namespace AppForManagement
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<INotesRepository, JsonNotesRepository>();
-            services.AddTransient<DataManager>();
-
             //var connectionString = "Server=(localdb)\\mssqllocaldb;Database=notesdb;Trusted_Connection=True;";
             //services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
 
             services.AddControllersWithViews();
+
+            services.AddTransient<INotesRepository, JsonNotesRepository>();
+            services.AddTransient<DataManager>();
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -51,6 +51,7 @@ namespace AppForManagement
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             if (!env.IsDevelopment())
