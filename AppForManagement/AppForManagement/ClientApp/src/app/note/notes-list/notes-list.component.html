@@ -2,9 +2,9 @@
   <table id="listOfNotes" class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">Age</th>
+        <th scope="col">{{ 'notes-list.thName' | translate }}</th>
+        <th scope="col">{{ 'notes-list.thSurname' | translate }}</th>
+        <th scope="col">{{ 'notes-list.thAge' | translate }}</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -14,18 +14,18 @@
         <td>{{ note.surname }}</td>
         <td>{{ note.age }}</td>
         <td>
-          <button (click)="showUpdateForm(note)" class="btn btn-primary" style="margin: 5px">Update</button>
-          <button (click)="deleteNote(note.id)" class="btn btn-danger" style="margin: 5px">Delete</button>
+          <button (click)="showUpdateForm(note)" class="btn btn-primary" style="margin: 5px">{{ 'notes-list.btnTextUpdate' | translate }}</button>
+          <button (click)="deleteNote(note.id)" class="btn btn-danger" style="margin: 5px">{{ 'notes-list.btnTextDelete' | translate }}</button>
         </td>
       </tr>
     </tbody>
   </table>
 
   <div *ngIf="isUpdateActivated" style="margin-top: 50px; margin-left: 50px;">
-    <h4>Update Note</h4>
+    <h4>{{ 'notes-list.h4UpdateNote' | translate }}</h4>
     <form (ngSubmit)="updateNote(updateForm)" #updateForm="ngForm">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">{{ 'notes-list.labelName' | translate }}</label>
         <input type="text"
                id="name"
                name="name"
@@ -35,7 +35,7 @@
                style="width: 300px" />
       </div>
       <div class="form-group">
-        <label for="surname">Surname</label>
+        <label for="surname">{{ 'notes-list.labelSurname' | translate }}</label>
         <input type="text"
                id="surname"
                name="surname"
@@ -45,7 +45,7 @@
                style="width: 300px" />
       </div>
       <div class="form-group">
-        <label for="age">Age</label>
+        <label for="age">{{ 'notes-list.labelAge' | translate }}</label>
         <input type="number"
                id="age"
                name="age"
@@ -54,7 +54,7 @@
                [(ngModel)]="noteToBeUpdated.age"
                style="width: 200px" />
       </div>
-      <button [disabled]="updateForm.invalid" class="btn btn-primary" type="submit">Update note</button>
+      <button [disabled]="updateForm.invalid" class="btn btn-primary" type="submit">{{ 'notes-list.btnTextUpdateNote' | translate }}</button>
     </form>
   </div>
 </div>

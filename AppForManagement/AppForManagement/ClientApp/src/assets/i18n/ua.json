@@ -1,0 +1,25 @@
+{
+  "app-component": {
+    "selectLang": "Обрати мову: ",
+    "listOfNotes": "Список записів",
+    "createNote": "Додати запис"
+  },
+  "notes-list": {
+    "thName": "Ім'я",
+    "thSurname": "Прізвище",
+    "thAge": "Вік",
+    "btnTextUpdate": "Змінити",
+    "btnTextDelete": "Видалити",
+    "h4UpdateNote": "Змінити запис",
+    "labelName": "Ім'я",
+    "labelSurname": "Фамилия",
+    "labelAge": "Вік",
+    "btnTextUpdateNote": "Оновити запис"
+  },
+  "create-note": {
+    "labelName": "Ім'я",
+    "labelSurname": "Прізвище",
+    "labelAge": "Вік",
+    "btnTextCreateNote": "Додати запис"
+  }
+}

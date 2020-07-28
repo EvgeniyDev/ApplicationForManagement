@@ -1,0 +1,25 @@
+{
+  "app-component": {
+    "selectLang": "Select language: ",
+    "listOfNotes": "List of notes",
+    "createNote": "Create note"
+  },
+  "notes-list": {
+    "thName": "Name",
+    "thSurname": "Surname",
+    "thAge": "Age",
+    "btnTextUpdate": "Update",
+    "btnTextDelete": "Delete",
+    "h4UpdateNote": "Update note",
+    "labelName": "Name",
+    "labelSurname": "Surname",
+    "labelAge": "Age",
+    "btnTextUpdateNote": "Update note"
+  },
+  "create-note": {
+    "labelName": "Name",
+    "labelSurname": "Surname",
+    "labelAge": "Age",
+    "btnTextCreateNote": "Create note"
+  }
+}

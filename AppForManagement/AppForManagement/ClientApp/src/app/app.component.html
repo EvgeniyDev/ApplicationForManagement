@@ -2,12 +2,18 @@
   <div>
     <ul class="nav nav-pills">
       <li class="nav-item">
-        <a class="nav-link" routerLink="notes" routerLinkActive="active">List of notes</a>
+        <a class="nav-link" routerLink="notes" routerLinkActive="active">{{'app-component.listOfNotes' | translate }}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="create-note" routerLinkActive="active">Create Note</a>
+        <a class="nav-link" routerLink="create-note" routerLinkActive="active">{{'app-component.createNote' | translate }}</a>
       </li>
     </ul>
+    <div class="langSelection">
+      {{ 'app-component.selectLang' | translate }}
+      <button class="btn btn-outline-primary btn-sm" (click)="switchLanguage('en')">en</button>
+      <button class="btn btn-outline-primary btn-sm" (click)="switchLanguage('ua')">ua</button>
+      <button class="btn btn-outline-primary btn-sm" (click)="switchLanguage('ru')">ru</button>
+    </div>
   </div>
 
   <div style="margin-top: 20px;">
